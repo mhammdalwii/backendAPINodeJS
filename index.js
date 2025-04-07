@@ -1,18 +1,27 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+const bodyParser = require("body-parser");
 
 // routes / URL / Endpoint utama kita method GET
+
+app.use(bodyParser.json());
+
 app.get("/", (req, res) => {
-  res.send("Utama");
+  res.send("Utama 1");
 });
 app.get("/hello", (req, res) => {
+  console.log({ urlParam: req.query });
   res.send("Hello World!");
 });
 app.post("/login", (req, res) => {
-  if (req.name === "alwi") {
-    res.send("login berhasil");
-  }
+  console.log({ requestFromOutside: req.body });
+  res.send("login berhasil");
+});
+
+app.put("/update", (req, res) => {
+  console.log({ updateData: req.body });
+  res.send("update berhasil");
 });
 
 app.listen(port, () => {
