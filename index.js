@@ -10,26 +10,28 @@ const response = require("./response.js");
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  const sql = "SELECT * FROM mhs";
-  db.query(sql, (err, result) => {
-    // hasil data dari mysql
-    response(200, result, "berhasil", res);
-  });
-});
-app.get("/find", (req, res) => {
-  const sql = `SELECT nama_lengkap FROM mhs WHERE nim = ${req.query.nim}`;
-  db.query(sql, (err, result) => {
-    response(200, result, "berhasil", res);
-  });
-});
-app.post("/login", (req, res) => {
-  console.log({ requestFromOutside: req.body });
-  res.send("login berhasil");
+  res.send("Hello World!");
 });
 
-app.put("/update", (req, res) => {
-  console.log({ updateData: req.body });
-  res.send("update berhasil");
+app.get("/mahasiswa", (req, res) => {
+  res.send("Hello mahasisawa");
+});
+
+app.get("/mahasiswa/:nim", (req, res) => {
+  const nim = req.params.nim;
+  res.send(`spesifik mahasiswa dengan id ${nim}`);
+});
+
+app.post("/mahasiswa", (req, res) => {
+  res.send("ini posting");
+});
+
+app.put("/mahasiswa", (req, res) => {
+  res.send("ini update");
+});
+
+app.delete("/mahasiswa", (req, res) => {
+  res.send("ini delete");
 });
 
 app.listen(port, () => {
